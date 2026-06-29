@@ -1,0 +1,61 @@
+{
+  "public_key": "A6EHv/POEL4dcN0Y50vAmWfk1jCbpQ1fHdyGZBJVMbg=",
+  "receipt": {
+    "id": "pcpt_rcpt_01HVECTOR000000000000002",
+    "org_id": "org_8Qx1",
+    "operation_id": "op_refund_8F31",
+    "agent_id": "SupportAgent-04",
+    "action": "refund",
+    "connectors_checked": ["stripe", "zendesk"],
+    "postconditions": [
+      {
+        "name": "refund_exists",
+        "category": "existence",
+        "status": "passed",
+        "detail": "Refund re_4md82k found in Stripe.",
+        "expected": null,
+        "actual": null
+      },
+      {
+        "name": "amount_matches",
+        "category": "match",
+        "status": "passed",
+        "detail": "Claimed amount matches Stripe.",
+        "expected": "12000 usd",
+        "actual": "12000 usd"
+      },
+      {
+        "name": "customer_matches",
+        "category": "match",
+        "status": "passed",
+        "detail": "Customer email matches.",
+        "expected": "mara.ellis@example.com",
+        "actual": "mara.ellis@example.com"
+      },
+      {
+        "name": "not_duplicate",
+        "category": "duplicate",
+        "status": "passed",
+        "detail": "No duplicate refund on the charge.",
+        "expected": null,
+        "actual": null
+      },
+      {
+        "name": "ticket_resolved",
+        "category": "state",
+        "status": "passed",
+        "detail": "Zendesk ticket #48921 is solved.",
+        "expected": null,
+        "actual": null
+      }
+    ],
+    "result": "verified",
+    "issued_at": "2026-01-09T08:12:04Z",
+    "valid_as_of": "2026-01-09T08:12:04Z",
+    "test": false,
+    "algorithm": "ed25519",
+    "version": "2",
+    "signing_key_id": "ed25519:A6EHv_POEL4dcN0Y",
+    "signature": "8dQByVaKzFyyeHE1zi30cy58dB0QVDamj2uoRH4q4LGqqVm1spqWsOvHlw6wUblZATM5YECiFAJLjfjcJkJWDA=="
+  }
+}

@@ -1,0 +1,83 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://postcept.com/schema/receipt.schema.json",
+  "title": "Postcept Receipt",
+  "description": "A signed, tamper-evident proof that a high-risk AI-agent action was checked against the system of record.",
+  "type": "object",
+  "required": [
+    "id",
+    "operation_id",
+    "agent_id",
+    "action",
+    "connectors_checked",
+    "postconditions",
+    "result",
+    "issued_at",
+    "signing_key_id",
+    "signature"
+  ],
+  "properties": {
+    "id": { "type": "string", "description": "Receipt id, e.g. pcpt_rcpt_..." },
+    "org_id": {
+      "type": ["string", "null"],
+      "description": "The organization the receipt belongs to (signed in v2)."
+    },
+    "operation_id": { "type": "string", "description": "Stable id for the agent operation." },
+    "agent_id": { "type": "string" },
+    "action": {
+      "type": "string",
+      "enum": ["refund", "cancellation", "ticket"],
+      "description": "The kind of action that was verified."
+    },
+    "connectors_checked": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "The systems of record actually consulted (e.g. [\"stripe\"]), by connector identity."
+    },
+    "postconditions": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/postcondition" }
+    },
+    "result": {
+      "type": "string",
+      "enum": ["verified", "incomplete", "duplicated", "mismatched", "policy_failed"]
+    },
+    "issued_at": { "type": "string", "format": "date-time" },
+    "valid_as_of": {
+      "type": ["string", "null"],
+      "format": "date-time",
+      "description": "The point in time the verification reflects (continuous reconciliation)."
+    },
+    "test": {
+      "type": "boolean",
+      "description": "True for sandbox/mock verifications. Signed, so a test receipt can't be presented as live."
+    },
+    "algorithm": { "type": "string", "const": "ed25519" },
+    "version": {
+      "type": "string",
+      "enum": ["1", "2"],
+      "description": "Signing-body version. Absent is treated as \"1\"."
+    },
+    "signing_key_id": { "type": "string", "description": "Key fingerprint, e.g. ed25519:..." },
+    "signature": {
+      "type": "string",
+      "description": "Base64 Ed25519 signature over the canonical signing body for this version."
+    }
+  },
+  "$defs": {
+    "postcondition": {
+      "type": "object",
+      "required": ["name", "status"],
+      "properties": {
+        "name": { "type": "string" },
+        "category": {
+          "type": ["string", "null"],
+          "enum": ["existence", "match", "state", "duplicate", "policy", null]
+        },
+        "status": { "type": "string", "enum": ["passed", "failed", "skipped"] },
+        "expected": { "type": ["string", "null"] },
+        "actual": { "type": ["string", "null"] }
+      }
+    }
+  }
+}
