@@ -1,0 +1,30 @@
+{
+  "_comment": "Real API-produced RFC 6962 consistency proof: log grew 2 -> 7.",
+  "public_key": "0Kvv7fBCh7vvpuOA6IdqPAy2aUel+hKW7QHpxFemnbI=",
+  "early_sth": {
+    "tree_size": 2,
+    "root_hash": "1b4e3de043bc6ced7e11cd97f6398c799825441fe7e0b806644b04543993ff4d",
+    "timestamp": "2026-07-01T14:05:01.868222Z",
+    "algorithm": "ed25519",
+    "signing_key_id": "ed25519:0Kvv7fBCh7vvpuOA",
+    "signature": "xixBypLprP1gWDyeQR7SmnJB/8K/hN7Chk5nSYvD/74KSwohjohPmO44DqyT10vJ9RvkeKBqtWKy0Ospf2eyCg=="
+  },
+  "consistency": {
+    "first_size": 2,
+    "second_size": 7,
+    "first_root": "1b4e3de043bc6ced7e11cd97f6398c799825441fe7e0b806644b04543993ff4d",
+    "second_root": "e96d8dddcaefbd71d9b7019441ae13ddf69fb156ab7dcd19e77da905bf401044",
+    "proof": [
+      "6b47ea73ed6af8b0a27bebf5a56f7eff6329607e2d993c619875095c69499f9f",
+      "b3e03148b97c905f2e804d84cb397ae9eeb37d3fbbaa58d5b441779fc09194ee"
+    ],
+    "sth": {
+      "tree_size": 7,
+      "root_hash": "e96d8dddcaefbd71d9b7019441ae13ddf69fb156ab7dcd19e77da905bf401044",
+      "timestamp": "2026-07-01T14:05:01.903561Z",
+      "algorithm": "ed25519",
+      "signing_key_id": "ed25519:0Kvv7fBCh7vvpuOA",
+      "signature": "xx1JJgUY7CdB/jIVzbukqMYL4MuLUfi6L0zaB1Uoyp8zWVSKgvA0HrpacA/f+j2VPjfBMXnLBMvfWOzf8GbCDQ=="
+    }
+  }
+}

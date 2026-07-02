@@ -1,0 +1,21 @@
+{
+  "public_key": "A6EHv/POEL4dcN0Y50vAmWfk1jCbpQ1fHdyGZBJVMbg=",
+  "proof": {
+    "receipt_id": "pcpt_rcpt_01HVECTOR000000000000002",
+    "leaf_index": 2,
+    "leaf_hash": "d4d0babec921cef8662862513327dd42a92a0480c0c24e1a082436a58b684481",
+    "tree_size": 4,
+    "audit_path": [
+      "24d486fa2656fdc39a1b7e9e45fc0603299af9901907979d67c1767461034ec4",
+      "a1dabb029585c267de44ca3950721bb0dcd458009a0e735fc46ffd7e2c05fa44"
+    ],
+    "sth": {
+      "tree_size": 4,
+      "root_hash": "10e8f6e523b5fc02ea0694f0ec615c1fcde99d930df00912426c565fa914c1cc",
+      "timestamp": "2026-01-09T08:12:04Z",
+      "algorithm": "ed25519",
+      "signing_key_id": "ed25519:A6EHv_POEL4dcN0Y",
+      "signature": "GvpVR/zui6U+JjBjcmWsROuMqd+vrLWgG7Rt52k2Un5MGkN6WuY3LIFzin3PNtV+CQNFN1p8EEeuZRa+GwmADw=="
+    }
+  }
+}
