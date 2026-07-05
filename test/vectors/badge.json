@@ -1,0 +1,14 @@
+{
+  "public_key": "A6EHv/POEL4dcN0Y50vAmWfk1jCbpQ1fHdyGZBJVMbg=",
+  "badge": {
+    "label": "Acme refunds",
+    "account_ref": "acct_3kf9",
+    "connector": "stripe",
+    "sampled": 200,
+    "verified_completion_rate": 0.965,
+    "issued_at": "2026-01-09T08:12:04Z",
+    "algorithm": "ed25519",
+    "signing_key_id": "ed25519:A6EHv_POEL4dcN0Y",
+    "signature": "Mc6SkMHWoMPOJVFdIyWRb3hsrQT+t6RdgedzBv4P8pvlCf8L5Sjlez4nb9h+DPWcrBf4ty4qMMZvO5GnjJYgDg=="
+  }
+}

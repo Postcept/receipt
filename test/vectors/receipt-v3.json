@@ -1,0 +1,83 @@
+{
+  "comment": "v3 dual-signed receipt. postcept_public_key verifies the evaluation role (verifyReceipt). relay_public_key + envelope_signing_body verify the observation role (verifyObservation).",
+  "postcept_public_key": "F8t5+ytBIPKx7GXkGY1uCLKOgT/rAeSkAIObheGAgM4=",
+  "relay_public_key": "11l5O7wTooGagnx2rbb7qKSa7gB/SfLQmS2ZuCWtLEg=",
+  "envelope_signing_body": {
+    "schema_version": "1",
+    "observation_id": "obs_v3vec",
+    "operation_id": "op_v3vec",
+    "org_id": "org_v3vec",
+    "relay_id": "rly_v3vec",
+    "connector": "stripe",
+    "connector_version": "0.1.0",
+    "observed_at": "2026-07-12T00:00:00Z",
+    "nonce": "v3vec-nonce-0123456789abcdef",
+    "facts": {
+      "exists": true,
+      "refund_id": "re_4md82k",
+      "charge_id": "ch_1P09x",
+      "amount_cents": 12000,
+      "currency": "usd",
+      "customer": "mara.ellis@example.com",
+      "status": "succeeded",
+      "operation_ref": "op_v3vec",
+      "duplicate_refund_ids": [],
+      "duplicates_available": true
+    },
+    "relay_key_id": "ed25519:11l5O7wTooGagnx2"
+  },
+  "receipt": {
+    "id": "pcpt_rcpt_01HV3VECTOR0000000000001",
+    "org_id": "org_v3vec",
+    "operation_id": "op_v3vec",
+    "agent_id": "SupportAgent-04",
+    "action": "refund",
+    "connectors_checked": [
+      "relay:rly_v3vec"
+    ],
+    "postconditions": [
+      {
+        "name": "refund_exists",
+        "category": "existence",
+        "status": "passed",
+        "detail": "Refund found.",
+        "expected": null,
+        "actual": null
+      },
+      {
+        "name": "amount_matches",
+        "category": "match",
+        "status": "passed",
+        "detail": "",
+        "expected": "12000",
+        "actual": "12000"
+      },
+      {
+        "name": "status_succeeded",
+        "category": "state",
+        "status": "passed",
+        "detail": "",
+        "expected": "succeeded",
+        "actual": "succeeded"
+      }
+    ],
+    "result": "verified",
+    "issued_at": "2026-07-12T00:00:00Z",
+    "valid_as_of": "2026-07-12T00:00:00Z",
+    "test": false,
+    "algorithm": "ed25519",
+    "version": "3",
+    "signing_key_id": "ed25519:F8t5-ytBIPKx7GXk",
+    "signature": "dYwHudLLUJjVkgyl5kUgnkdysF5R1El9j48LUfSqEVGJfQmSewVOcNsZ0a4wP8a3XfxSeXLQclKDWFpZbyOzDg==",
+    "supersedes": null,
+    "superseded_by": null,
+    "contract_digest": "sha256:testcontract",
+    "lifecycle": "finalized",
+    "safe_to_claim_complete": true,
+    "correlation_strength": "deterministic",
+    "observation_relay_id": "rly_v3vec",
+    "observation_key_id": "ed25519:11l5O7wTooGagnx2",
+    "observation_digest": "sha256:270190ed62f58b93746c573d6cc511214f5b0c0af7868660c0d36fbaa4011fe6",
+    "observation_signature": "WTVnePmNZCuIKPScFuaA3CgaGa13WVJaRRA2cqIAuF7utk4aLh4vXuK/vVfLBCFrL1rd99CTCKe7EErn/pvVDg=="
+  }
+}

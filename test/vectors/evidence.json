@@ -1,0 +1,33 @@
+{
+  "public_key": "A6EHv/POEL4dcN0Y50vAmWfk1jCbpQ1fHdyGZBJVMbg=",
+  "export": {
+    "manifest": {
+      "type": "postcept-evidence-manifest",
+      "org_id": "org_8Qx1",
+      "generated_at": "2026-01-09T08:12:04Z",
+      "verification_count": 2,
+      "vcr": { "verified_completion_rate": 0.943 },
+      "audit_chain_intact": true,
+      "transparency_tree_size": 4,
+      "transparency_root": "10e8f6e523b5fc02ea0694f0ec615c1fcde99d930df00912426c565fa914c1cc",
+      "content_digest": "5abcc4dbe9735fe7cd5bb1c6c2b9b5c5084f78c246a93b5199aae27e48d3a9f2",
+      "algorithm": "ed25519",
+      "signing_key_id": "ed25519:A6EHv_POEL4dcN0Y",
+      "signature": "mPe7bsZk6suZfG7v6O5mnjNDokpQDyrPnnwIvk6YnUqhk0dDeGJWiP3a6KTFfxTEcEmooY5pgVuAWWt+EEVKAQ=="
+    },
+    "verifications": [
+      {
+        "receipt": {
+          "id": "pcpt_rcpt_01HVECTOR000000000000002",
+          "signature": "8dQByVaKzFyyeHE1zi30cy58dB0QVDamj2uoRH4q4LGqqVm1spqWsOvHlw6wUblZATM5YECiFAJLjfjcJkJWDA=="
+        }
+      },
+      {
+        "receipt": {
+          "id": "pcpt_rcpt_01HVECTOREVID0000000000A",
+          "signature": "ZXZBMQ=="
+        }
+      }
+    ]
+  }
+}
