@@ -1,0 +1,48 @@
+name: Publish
+
+# Publishes to npm on a GitHub release. Uses npm trusted publishing (OIDC), so
+# there is no token to store: npm verifies the release came from this workflow and
+# attaches a provenance attestation automatically.
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: write # attach the SBOM to the GitHub release
+  id-token: write # OIDC, for trusted publishing and provenance
+  attestations: write # build-provenance attestation for the published artifact
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    # NOTE (SUPPLY-001): pin these actions to immutable commit SHAs before launch.
+    # Left as version tags here because a fabricated SHA would silently break the
+    # workflow. Dependabot (already enabled) or the founder should pin them.
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          registry-url: https://registry.npmjs.org
+      - run: npm install -g npm@latest
+      - run: npm install
+      - run: npm run build
+      - run: node --test
+      # Software bill of materials (CycloneDX), attached to the release so
+      # consumers can see exactly what shipped.
+      - name: Generate SBOM
+        run: npm sbom --sbom-format cyclonedx --omit dev > sbom.cyclonedx.json
+      - name: Attach SBOM to the release
+        run: gh release upload "${{ github.event.release.tag_name }}" sbom.cyclonedx.json
+        env:
+          GH_TOKEN: ${{ github.token }}
+      # --provenance makes npm attach a signed provenance statement linking the
+      # tarball to this workflow + commit (verifiable with `npm audit signatures`).
+      - run: npm publish --access public --provenance
+      # A second, GitHub-native build-provenance attestation over the packed tarball.
+      - name: Pack for attestation
+        run: npm pack --pack-destination dist-pack
+      - name: Attest build provenance
+        uses: actions/attest-build-provenance@v1
+        with:
+          subject-path: dist-pack/*.tgz
