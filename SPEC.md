@@ -154,6 +154,9 @@ The v3 signing body is the v2 body with `version: "3"` plus:
 {
   // ...all v2 fields...
   "version": "3",
+  "algorithm": "ed25519",                 // the signature scheme, now signed
+  "signing_key_id": "ed25519:...",        // the key that signed, now signed
+  "canonicalization": "postcept-canonical-json-v1",  // the scheme in §2, now signed
   "supersedes": "<receipt_id | null>",
   "contract_digest": "sha256:... | null",
   "lifecycle": "finalized | pending_finality | ... | null",

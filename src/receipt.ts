@@ -48,6 +48,12 @@ export interface Observation {
   signature: string | null;
 }
 
+// Stable identifier for the canonical-JSON scheme (sorted keys, no whitespace,
+// non-ASCII and control characters escaped). Bound into the v3 signing body so the
+// signature covers which scheme produced the bytes. Matches CANONICALIZATION_SCHEME
+// in the control plane. Bump both together if the scheme ever changes.
+export const CANONICALIZATION_SCHEME = "postcept-canonical-json-v1";
+
 /**
  * The exact subset of a receipt the signature covers, by version. `ts` applies a
  * timestamp spelling so the caller can retry "Z" vs "+00:00" (see verifyReceipt).
@@ -83,6 +89,10 @@ export function receiptSigningBody(r: Receipt, ts: (s: string) => string): Recor
     return {
       ...v2,
       version: "3",
+      // Bind the signature metadata into the protected content (see CANONICALIZATION_SCHEME).
+      algorithm: r.algorithm ?? "ed25519",
+      signing_key_id: r.signing_key_id ?? null,
+      canonicalization: CANONICALIZATION_SCHEME,
       supersedes: r.supersedes ?? null,
       contract_digest: r.contract_digest ?? null,
       lifecycle: r.lifecycle ?? null,

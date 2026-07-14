@@ -20,7 +20,7 @@
     "id": { "type": "string", "description": "Receipt id, e.g. pcpt_rcpt_..." },
     "org_id": {
       "type": ["string", "null"],
-      "description": "The organization the receipt belongs to (signed in v2)."
+      "description": "The organization the receipt belongs to (signed from v2)."
     },
     "operation_id": { "type": "string", "description": "Stable id for the agent operation." },
     "agent_id": { "type": "string" },
@@ -32,7 +32,7 @@
     "connectors_checked": {
       "type": "array",
       "items": { "type": "string" },
-      "description": "The systems of record actually consulted (e.g. [\"stripe\"]), by connector identity."
+      "description": "The systems of record actually consulted (e.g. [\"stripe\"]), by connector identity. A relay-backed verification names the relay, e.g. [\"relay:rly_...\"]."
     },
     "postconditions": {
       "type": "array",
@@ -50,18 +50,78 @@
     },
     "test": {
       "type": "boolean",
-      "description": "True for sandbox/mock verifications. Signed, so a test receipt can't be presented as live."
+      "description": "True for sandbox verifications. Signed, so a test receipt cannot be presented as live."
     },
-    "algorithm": { "type": "string", "const": "ed25519" },
+    "algorithm": {
+      "type": "string",
+      "const": "ed25519",
+      "description": "Signature scheme. Bound into the signed body from v3."
+    },
     "version": {
       "type": "string",
-      "enum": ["1", "2"],
-      "description": "Signing-body version. Absent is treated as \"1\"."
+      "enum": ["1", "2", "3"],
+      "description": "Signing-body version. Absent is treated as \"1\". v3 binds the signature metadata, the outcome contract, the lifecycle decision and the observation role into the signed body."
     },
-    "signing_key_id": { "type": "string", "description": "Key fingerprint, e.g. ed25519:..." },
+    "signing_key_id": {
+      "type": "string",
+      "description": "Key fingerprint, e.g. ed25519:... Bound into the signed body from v3."
+    },
     "signature": {
       "type": "string",
-      "description": "Base64 Ed25519 signature over the canonical signing body for this version."
+      "description": "Base64 Ed25519 signature over the canonical signing body for this version. This is the evaluation role, signed by Postcept."
+    },
+
+    "supersedes": {
+      "type": ["string", "null"],
+      "description": "The receipt this one replaces after re-verification found the truth changed. Signed from v3. Earlier receipts are never mutated."
+    },
+    "superseded_by": {
+      "type": ["string", "null"],
+      "description": "Set when serving a receipt that a later one replaced. Not part of any signing body."
+    },
+    "contract_digest": {
+      "type": ["string", "null"],
+      "description": "sha256 digest of the versioned Outcome Contract this verification was judged by. Signed from v3."
+    },
+    "lifecycle": {
+      "type": ["string", "null"],
+      "enum": [
+        "unobserved",
+        "observed",
+        "pending_finality",
+        "finalized",
+        "reversed",
+        "indeterminate",
+        "unreachable",
+        null
+      ],
+      "description": "Where the action sits in the provider's lifecycle, separate from the outcome. Signed from v3."
+    },
+    "safe_to_claim_complete": {
+      "type": ["boolean", "null"],
+      "description": "The one boolean an agent may act on. True only when the outcome is verified, the provider state is terminal, and every required postcondition actually ran. Signed from v3."
+    },
+    "correlation_strength": {
+      "type": ["string", "null"],
+      "enum": ["deterministic", "heuristic", "uncorrelatable", null],
+      "description": "How the claim was located in the system of record. Signed from v3."
+    },
+
+    "observation_relay_id": {
+      "type": ["string", "null"],
+      "description": "Observation role. The customer-side relay that read the system of record. Present only on relay-backed receipts."
+    },
+    "observation_key_id": {
+      "type": ["string", "null"],
+      "description": "Observation role. The relay key that signed the observation envelope."
+    },
+    "observation_digest": {
+      "type": ["string", "null"],
+      "description": "Observation role. sha256 over the relay's canonical observation envelope, so the envelope can be checked against this receipt."
+    },
+    "observation_signature": {
+      "type": ["string", "null"],
+      "description": "Observation role. The relay's own Ed25519 signature over the observation envelope. Verified with verifyObservation(receipt, envelope, relayKey). Together with the evaluation signature this is the dual-signature guarantee: the relay observed the source, Postcept evaluated it, and neither can forge the other's statement."
     }
   },
   "$defs": {
@@ -75,6 +135,10 @@
           "enum": ["existence", "match", "state", "duplicate", "policy", null]
         },
         "status": { "type": "string", "enum": ["passed", "failed", "skipped"] },
+        "detail": {
+          "type": ["string", "null"],
+          "description": "Human-readable explanation. Carried on the receipt, not part of the signing body."
+        },
         "expected": { "type": ["string", "null"] },
         "actual": { "type": ["string", "null"] }
       }

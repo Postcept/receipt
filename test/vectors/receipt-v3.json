@@ -1,7 +1,7 @@
 {
-  "comment": "v3 dual-signed receipt. postcept_public_key verifies the evaluation role (verifyReceipt). relay_public_key + envelope_signing_body verify the observation role (verifyObservation).",
-  "postcept_public_key": "F8t5+ytBIPKx7GXkGY1uCLKOgT/rAeSkAIObheGAgM4=",
-  "relay_public_key": "11l5O7wTooGagnx2rbb7qKSa7gB/SfLQmS2ZuCWtLEg=",
+  "comment": "v3 dual-signed receipt. postcept_public_key verifies the evaluation role (verifyReceipt). relay_public_key + envelope_signing_body verify the observation role (verifyObservation). Regenerate with postcept-api/scripts/gen_receipt_v3_vector.py.",
+  "postcept_public_key": "wFDFY3pE+oYp//PMzOIwDLNipj2Z2V/FQUUmb0MyRFo=",
+  "relay_public_key": "LfBBJfABWvtHzoU674dyCU/5SYwUyxueEpc8KSfaD6Y=",
   "envelope_signing_body": {
     "schema_version": "1",
     "observation_id": "obs_v3vec",
@@ -24,7 +24,7 @@
       "duplicate_refund_ids": [],
       "duplicates_available": true
     },
-    "relay_key_id": "ed25519:11l5O7wTooGagnx2"
+    "relay_key_id": "ed25519:LfBBJfABWvtHzoU6"
   },
   "receipt": {
     "id": "pcpt_rcpt_01HV3VECTOR0000000000001",
@@ -67,8 +67,8 @@
     "test": false,
     "algorithm": "ed25519",
     "version": "3",
-    "signing_key_id": "ed25519:F8t5-ytBIPKx7GXk",
-    "signature": "dYwHudLLUJjVkgyl5kUgnkdysF5R1El9j48LUfSqEVGJfQmSewVOcNsZ0a4wP8a3XfxSeXLQclKDWFpZbyOzDg==",
+    "signing_key_id": "ed25519:wFDFY3pE-oYp__PM",
+    "signature": "MwYGNJu/e9pFUsuzU58hqySXL7QKiHd8lofdETVHqaqaAK45qGiSnABD5YzrqDHwkTTbg80CwWM46xmtE/U/BA==",
     "supersedes": null,
     "superseded_by": null,
     "contract_digest": "sha256:testcontract",
@@ -76,8 +76,8 @@
     "safe_to_claim_complete": true,
     "correlation_strength": "deterministic",
     "observation_relay_id": "rly_v3vec",
-    "observation_key_id": "ed25519:11l5O7wTooGagnx2",
-    "observation_digest": "sha256:270190ed62f58b93746c573d6cc511214f5b0c0af7868660c0d36fbaa4011fe6",
-    "observation_signature": "WTVnePmNZCuIKPScFuaA3CgaGa13WVJaRRA2cqIAuF7utk4aLh4vXuK/vVfLBCFrL1rd99CTCKe7EErn/pvVDg=="
+    "observation_key_id": "ed25519:LfBBJfABWvtHzoU6",
+    "observation_digest": "sha256:60e43dbd10af040b7aff75d1fbcd2c5024b5c646c132d8351f3d81f5c0f142dd",
+    "observation_signature": "gFlNOuHe7o3HJrtbXv6o3609HIE506YoI45EZR5r9E9zXOHZh4SF/RgKMyFfhjhAcwKq+tdV7H0ELtGf4nXtCQ=="
   }
 }

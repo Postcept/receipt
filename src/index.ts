@@ -3,6 +3,7 @@
 // SPEC.md for the format and signing scheme.
 export { asciiJson, base64ToBytes, canonicalize, TIMESTAMP_SPELLINGS } from "./canonical.js";
 export {
+  CANONICALIZATION_SCHEME,
   type Observation,
   type Postcondition,
   type Receipt,
