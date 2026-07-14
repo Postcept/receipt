@@ -1,6 +1,6 @@
 {
   "name": "@postcept/receipt",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "Independently verify a Postcept Receipt, the signed proof that an AI agent's high-risk action actually happened in the system of record. Runs anywhere, needs only the public key.",
   "license": "MIT",
   "author": "Postcept",
